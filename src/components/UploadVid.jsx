@@ -98,8 +98,11 @@ const UploadVid = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:4000/send-otp",
-        otpEmail
+        "http://localhost:4000/send-otp",{
+        body:{
+          otpEmail : otpEmail
+        }
+      }
       );
       setLoader(false);
       if (response.data.success) {
