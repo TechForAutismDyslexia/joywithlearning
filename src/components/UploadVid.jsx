@@ -34,12 +34,13 @@ const UploadVid = () => {
     e.preventDefault();
     setLoader(true);
     const storedData = JSON.parse(sessionStorage.getItem("form1Data"));
-    const otpEmail = storedData.parentEmail;
+    // const otpEmail = storedData.parentEmail;
+    const email = storedData.parentEmail;
 
     try {
       const response = await axios.post(
-        "http://localhost:4000/verify-otp",
-        { otpEmail, otp },
+        "http://localhost:4000/verify/verify-otp",
+        { email, otp },
         {
           headers: {
             "Content-Type": "application/json",
@@ -98,11 +99,7 @@ const UploadVid = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:4000/send-otp",{
-        body:{
-          otpEmail : otpEmail
-        }
-      }
+        "http://localhost:4000/api/send-otp",{otpEmail}
       );
       setLoader(false);
       if (response.data.success) {
