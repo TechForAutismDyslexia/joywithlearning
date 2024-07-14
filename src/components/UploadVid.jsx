@@ -14,7 +14,6 @@ const UploadVid = () => {
     alternatePhoneNo: "",
   });
   const [otp, setOtp] = useState("");
-  const [video, setVideo] = useState(null);
   const [step, setStep] = useState(1);
   const [loader, setLoader] = useState(false);
 
@@ -39,7 +38,7 @@ const UploadVid = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:4000/verify/verify-otp",
+        "http://localhost:4000/api/verify-otp",
         { email, otp },
         {
           headers: {
@@ -59,20 +58,22 @@ const UploadVid = () => {
     }
   };
 
-  const handleVideoChange = (e) => {
-    setVideo(e.target.files[0]);
-  };
 
   const handleVideoFormSubmit = async (e) => {
     e.preventDefault();
     setLoader(true);
+    const video = e.target.uploadvideo.files[0];
     const storedData = JSON.parse(sessionStorage.getItem("form1Data"));
     const formData = new FormData();
     formData.append("video", video);
     formData.append("storedData", JSON.stringify(storedData));
 
     try {
-      const response = await axios.post(apiUrl, formData);
+      const response = await axios.post("http://localhost:4000/api/enquire", formData , {
+        headers:{
+          'Content-Type' : 'multipart/form-data'
+        }
+      });
       setLoader(false);
       if (response.data.success) {
         setStep(4); // Move to success message step
@@ -80,7 +81,7 @@ const UploadVid = () => {
         console.log("Error submitting video form:", response.data);
       }
     } catch (error) {
-      console.error("Error submitting video form:", error);
+      console.error("Error submitting video (outside) form:", error);
       setLoader(false);
     }
   };
@@ -295,13 +296,9 @@ const UploadVid = () => {
                     className="form-control"
                     id="uploadvideo"
                     name="uploadvideo"
-                    onChange={handleVideoChange}
                     placeholder="Upload Video"
                     required
                   />
-                  <label htmlFor="uploadvideo">
-                    Upload Video <span className="text-danger">*</span>
-                  </label>
                 </div>
                 <div className="text-center">
                   {!loader ? (

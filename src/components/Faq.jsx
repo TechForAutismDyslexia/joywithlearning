@@ -60,6 +60,7 @@ const Faq = () => {
   ];
 
   return (
+    <div className='faq'>
     <div className="container mt-5 mb-5">
       <h1 className="mb-4 fw-medium text-center">Frequently Asked Questions</h1>
       <div className="faq-list">
@@ -79,6 +80,7 @@ const Faq = () => {
           </div>
         ))}
       </div>
+    </div>
     </div>
   );
 };

@@ -3,8 +3,8 @@ import './About.css'; // Import your CSS file
 const About = () => {
   return (
     <div className="about">
-      <div className="about-container ">
-        <h1>About JoyWithLearning</h1>
+      <div className="about-container  ">
+        <h1>Joy With Learning</h1>
         <hr></hr>
         <div className="about-content">
           <p>Welcome to JoyWithLearning, a platform dedicated to providing support and resources for individuals with dyslexia and autism spectrum disorder (ASD). Our mission is to empower individuals, families, and educators by offering valuable information, practical strategies, and a supportive community.</p>
