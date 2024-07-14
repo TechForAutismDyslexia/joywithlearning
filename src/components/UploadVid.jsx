@@ -7,6 +7,7 @@ const UploadVid = () => {
   const [formData, setFormData] = useState({
     childName: "",
     childAge: "",
+    childGender: "",
     parentName: "",
     parentEmail: "",
     parentPhoneNo: "",
@@ -16,6 +17,7 @@ const UploadVid = () => {
   const [otp, setOtp] = useState("");
   const [step, setStep] = useState(1);
   const [loader, setLoader] = useState(false);
+  const [radio, setRadio] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,6 +25,11 @@ const UploadVid = () => {
       ...formData,
       [name]: value,
     });
+  };
+
+  const handleRadioChange = (e) => {
+    setRadio(e.target.value);
+    handleChange(e);
   };
 
   const handleOtpChange = (e) => {
@@ -48,6 +55,7 @@ const UploadVid = () => {
       );
       setLoader(false);
       if (response.data.success) {
+        sessionStorage.setItem("token", response.data.token);
         setStep(3); // Move to video upload step
       } else {
         console.log("Error submitting otpForm:", response.data);
@@ -58,7 +66,6 @@ const UploadVid = () => {
     }
   };
 
-
   const handleVideoFormSubmit = async (e) => {
     e.preventDefault();
     setLoader(true);
@@ -67,13 +74,18 @@ const UploadVid = () => {
     const formData = new FormData();
     formData.append("video", video);
     formData.append("storedData", JSON.stringify(storedData));
-
+    const headToken = sessionStorage.getItem("token");
     try {
-      const response = await axios.post("http://localhost:4000/api/enquire", formData , {
-        headers:{
-          'Content-Type' : 'multipart/form-data'
+      const response = await axios.post(
+        "http://localhost:4000/api/enquire",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `${headToken}`,
+          },
         }
-      });
+      );
       setLoader(false);
       if (response.data.success) {
         setStep(4); // Move to success message step
@@ -99,9 +111,9 @@ const UploadVid = () => {
     const otpEmail = dataToStore.parentEmail;
 
     try {
-      const response = await axios.post(
-        "http://localhost:4000/api/send-otp",{otpEmail}
-      );
+      const response = await axios.post("http://localhost:4000/api/send-otp", {
+        otpEmail,
+      });
       setLoader(false);
       if (response.data.success) {
         setStep(2); // Move to OTP step
@@ -118,7 +130,7 @@ const UploadVid = () => {
     <div className="upload-vid">
       <div className="container">
         <div className="row justify-content-center">
-          <div className="col-lg-9">
+          <div className="col-lg-12">
             {step === 1 && (
               <form
                 className="border uploadvidform rounded-4 m-auto p-4 bg-white"
@@ -154,6 +166,31 @@ const UploadVid = () => {
                   <label htmlFor="childAge">
                     Child Age <span className="text-danger">*</span>
                   </label>
+                </div>
+                <div className="mb-1 form-floating d-flex flex-wrap ms-1 gap-3">
+                  <p className="ms-1">Child Gender :</p>
+                  <div className="form-check">
+                    <input
+                      className="form-check-input border-dark"
+                      type="radio"
+                      name="childGender"
+                      value="male"
+                      checked={radio === "male"}
+                      onChange={handleRadioChange}
+                    />
+                    <label className="form-check-label">Male</label>
+                  </div>
+                  <div className="form-check">
+                    <input
+                      className="form-check-input border-dark"
+                      type="radio"
+                      name="childGender"
+                      value="female"
+                      checked={radio === "female"}
+                      onChange={handleRadioChange}
+                    />
+                    <label className="form-check-label">Female</label>
+                  </div>
                 </div>
                 <div className="mb-3 form-floating">
                   <input
