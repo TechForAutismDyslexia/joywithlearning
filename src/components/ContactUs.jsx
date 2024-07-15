@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useState } from 'react';
 import "./ContactUs.css"
+import { ToastContainer,toast } from 'react-bootstrap';
 import 'react-toastify/dist/ReactToastify.css';
 
 const ContactUs = () => {
@@ -35,7 +36,7 @@ const ContactUs = () => {
       const response = await axios.post("https://jwlgamesbackend.vercel.app/api/jwl/feedback" ,formData);
       if(response.data.success){
         console.log(response.data.message)
-
+        toast.success(response.data.message)
       }
       setFormData({
         name: '',

@@ -70,8 +70,9 @@ const KnowMore = () => {
     try {
       const response = await axios.post(
         "https://jwlgamesbackend.vercel.app/api/jwl/verify-otp",
-        { otp : otp, email: email }
+        { email: email,otp : otp }
       );
+      console.log(response.data)
       if (response.data.success) {
         const headToken = response.data.token;
         try {

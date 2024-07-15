@@ -45,13 +45,9 @@ const UploadVid = () => {
 
     try {
       const response = await axios.post(
-        "https://jwlgamesbackend.vecel.app/api/jwl/verify-otp",
+        "https://jwlgamesbackend.vercel.app/api/jwl/verify-otp",
         { email, otp },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
+        
       );
       setLoader(false);
       if (response.data.success) {
@@ -79,7 +75,8 @@ const UploadVid = () => {
     const parentPhoneNo = storedData.parentPhoneNo
     const alternateEmail = storedData.alternateEmail
     const alternatePhoneNo = storedData.alternatePhoneNo
-
+    
+    const formData = new FormData();
     formData.append("childName",childName)
     formData.append("childAge",childAge)
     formData.append("childGender",childGender)
