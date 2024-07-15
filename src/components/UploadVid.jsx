@@ -71,9 +71,24 @@ const UploadVid = () => {
     setLoader(true);
     const video = e.target.uploadvideo.files[0];
     const storedData = JSON.parse(sessionStorage.getItem("form1Data"));
-    const formData = new FormData();
+    const childName = storedData.childName
+    const childAge = storedData.childAge
+    const childGender = storedData.childGender
+    const parentName = storedData.parentName
+    const parentEmail = storedData.parentEmail
+    const parentPhoneNo = storedData.parentPhoneNo
+    const alternateEmail = storedData.alternateEmail
+    const alternatePhoneNo = storedData.alternatePhoneNo
+
+    formData.append("childName",childName)
+    formData.append("childAge",childAge)
+    formData.append("childGender",childGender)
+    formData.append("parentName",parentName)
+    formData.append("parentEmail",parentEmail)
+    formData.append("parentPhoneNo",parentPhoneNo)
+    formData.append("alternateEmail",alternateEmail)
+    formData.append("alternatePhoneNo",alternatePhoneNo)
     formData.append("video", video);
-    formData.append("storedData", JSON.stringify(storedData));
     const headToken = sessionStorage.getItem("token");
     try {
       const response = await axios.post(

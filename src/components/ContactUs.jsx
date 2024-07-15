@@ -1,7 +1,7 @@
 import axios from 'axios';
-import ThankYouModal from './ThankYouModal';
 import { useState } from 'react';
 import "./ContactUs.css"
+import 'react-toastify/dist/ReactToastify.css';
 
 const ContactUs = () => {
   const [formData, setFormData] = useState({
@@ -10,7 +10,7 @@ const ContactUs = () => {
     feedback: ''
   });
 
-  const [showModal, setShowModal] = useState(false);
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -30,13 +30,13 @@ const ContactUs = () => {
       return;
     }
 
-    const apiUrl = 'https://your-api-endpoint.com/submitFeedback';
 
     try {
-      const response = await axios.post(apiUrl, formData);
-      console.log('Form data sent successfully:', response.data);
+      const response = await axios.post("https://jwlgamesbackend.vercel.app/api/jwl/feedback" ,formData);
+      if(response.data.success){
+        console.log(response.data.message)
 
-      setShowModal(true);
+      }
       setFormData({
         name: '',
         email: '',
@@ -47,9 +47,6 @@ const ContactUs = () => {
     }
   };
 
-  const closeModal = () => {
-    setShowModal(false);
-  };
 
   return (
     <div className="contact-us">
@@ -87,17 +84,19 @@ const ContactUs = () => {
                 <label htmlFor="email">Email address<span className="text-danger"> *</span></label>
               </div>
               <div className="mb-3 form-floating">
-                <label htmlFor="feedback">Feedback<span className="text-danger"> *</span></label>
                 <textarea
                   className="form-control"
                   id="feedback"
                   name="feedback"
-                  rows="8" // Adjust the number of rows here
                   value={formData.feedback}
+                  placeholder="Leave a comment here"
                   onChange={handleChange}
-                  placeholder="Enter your feedback"
                   required
+                  style={{
+                    height:"150px"
+                  }}
                 ></textarea>
+                <label htmlFor="feedback">Feedback<span className="text-danger"> *</span></label>
               </div>
               <div className="text-center">
                 <button type="submit" className="btn btn-primary w-100 p-2">
@@ -109,7 +108,7 @@ const ContactUs = () => {
         </div>
       </div>
 
-      <ThankYouModal show={showModal} onClose={closeModal} />
+      
     </div>
   );
 };
