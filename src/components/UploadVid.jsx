@@ -45,7 +45,7 @@ const UploadVid = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:4000/api/verify-otp",
+        "https://jwlgamesbackend.vecel.app/api/jwl/verify-otp",
         { email, otp },
         {
           headers: {
@@ -92,7 +92,7 @@ const UploadVid = () => {
     const headToken = sessionStorage.getItem("token");
     try {
       const response = await axios.post(
-        "http://localhost:4000/api/enquire",
+        "https://jwlgamesbackend.vercel.app/api/jwl/enquire",
         formData,
         {
           headers: {
@@ -126,7 +126,7 @@ const UploadVid = () => {
     const otpEmail = dataToStore.parentEmail;
 
     try {
-      const response = await axios.post("http://localhost:4000/api/send-otp", {
+      const response = await axios.post("https://jwlgamesbackend.vercel.app/api/jwl/send-otp", {
         otpEmail,
       });
       setLoader(false);

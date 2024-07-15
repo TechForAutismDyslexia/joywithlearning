@@ -47,7 +47,7 @@ const KnowMore = () => {
     const otpEmail = dataToStore.parentEmail;
 
     try {
-      const response = await axios.post("http://localhost:4000/api/send-otp", {
+      const response = await axios.post("https://jwlgaesbackend.vercel.ap/api/jwl/send-otp", {
         otpEmail,
       });
       setLoader(false);
@@ -69,7 +69,7 @@ const KnowMore = () => {
     const email = storedData.parentEmail;
     try {
       const response = await axios.post(
-        "http://localhost:4000/api/verify-otp",
+        "https://jwlgamesbackend.vercel.app/api/jwl/verify-otp",
         { otp : otp, email: email }
       );
       if (response.data.success) {
@@ -77,7 +77,7 @@ const KnowMore = () => {
         try {
           console.log(storedData)
           const response = await axios.post(
-            "http://localhost:4000/api/know-more",
+            "https://jwlgamesbackend.vercel.app/api/jwl/know-more",
             storedData,
             {
               headers: {
