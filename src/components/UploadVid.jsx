@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import "./UploadVid.css";
 import Loader from "./Loader";
+import {toast , ToastContainer} from "react-toastify"
 
 const UploadVid = () => {
   const [formData, setFormData] = useState({
@@ -54,10 +55,10 @@ const UploadVid = () => {
         sessionStorage.setItem("token", response.data.token);
         setStep(3); // Move to video upload step
       } else {
-        console.log("Error submitting otpForm:", response.data);
+        toast.error("Error submitting otpForm");
       }
     } catch (error) {
-      console.error("Error submitting otpForm:", error);
+      toast.error("Error submitting otpForm");
       setLoader(false);
     }
   };
@@ -102,10 +103,10 @@ const UploadVid = () => {
       if (response.data.success) {
         setStep(4); // Move to success message step
       } else {
-        console.log("Error submitting video form:", response.data);
+        toast.error("Error submitting video form");
       }
     } catch (error) {
-      console.error("Error submitting video (outside) form:", error);
+      toast.error("Error submitting video form");
       setLoader(false);
     }
   };
@@ -130,10 +131,10 @@ const UploadVid = () => {
       if (response.data.success) {
         setStep(2); // Move to OTP step
       } else {
-        console.log("Error submitting form1:", response.data);
+        toast.error("Error submitting form");
       }
     } catch (error) {
-      console.error("Error submitting form1:", error);
+      toast.error("Error submitting form");
       setLoader(false);
     }
   };

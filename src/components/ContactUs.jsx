@@ -1,8 +1,9 @@
 import axios from 'axios';
 import { useState } from 'react';
 import "./ContactUs.css"
-import { ToastContainer,toast } from 'react-bootstrap';
+import { ToastContainer , toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Loader from './Loader';
 
 const ContactUs = () => {
   const [formData, setFormData] = useState({
@@ -11,6 +12,7 @@ const ContactUs = () => {
     feedback: ''
   });
 
+  const [loader , setLoader] = useState(false)
 
 
   const handleChange = (e) => {
@@ -24,19 +26,16 @@ const ContactUs = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Simple email validation using regex
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(formData.email)) {
-      console.error('Please enter a valid email address.');
-      return;
-    }
-
-
     try {
+      setLoader(true)
       const response = await axios.post("https://jwlgamesbackend.vercel.app/api/jwl/feedback" ,formData);
       if(response.data.success){
-        console.log(response.data.message)
+        setLoader(false)
         toast.success(response.data.message)
+      }
+      else{
+        setLoader(false)
+        toast.error(response.data.message)
       }
       setFormData({
         name: '',
@@ -44,13 +43,16 @@ const ContactUs = () => {
         feedback: ''
       });
     } catch (error) {
-      console.error('Error sending form data:', error);
+      setLoader(false)
+      toast.error("Error Saving Feedback")
+
     }
   };
 
 
   return (
     <div className="contact-us">
+      <ToastContainer />
       <div className="container">
         <div className="row justify-content-center mt-5">
           <div className="col-lg-8">
@@ -100,9 +102,10 @@ const ContactUs = () => {
                 <label htmlFor="feedback">Feedback<span className="text-danger"> *</span></label>
               </div>
               <div className="text-center">
-                <button type="submit" className="btn btn-primary w-100 p-2">
+                {!loader && (<button type="submit" className="btn btn-primary w-100 p-2">
                   Submit
-                </button>
+                </button>)}
+                {loader && (<Loader/>)}
               </div>
             </form>
           </div>

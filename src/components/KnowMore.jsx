@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./KnowMore.css";
 import Loader from "./Loader";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const KnowMore = () => {
   const videoUrls = [
@@ -47,17 +48,19 @@ const KnowMore = () => {
     const otpEmail = dataToStore.parentEmail;
 
     try {
-      const response = await axios.post("https://jwlgaesbackend.vercel.ap/api/jwl/send-otp", {
-        otpEmail,
-      });
+      const response = await axios.post(
+        "https://jwlgamesbackend.vercel.app/api/jwl/send-otp",
+        {
+          otpEmail,
+        }
+      );
       setLoader(false);
       if (response.data.success) {
         setStep(3); // Move to OTP step
       } else {
-        console.log("Error submitting form1:", response.data);
+        toast.error("Error submitting form");
       }
     } catch (error) {
-      console.error("Error submitting form1:", error);
       setLoader(false);
     }
   };
@@ -70,13 +73,11 @@ const KnowMore = () => {
     try {
       const response = await axios.post(
         "https://jwlgamesbackend.vercel.app/api/jwl/verify-otp",
-        { email: email,otp : otp }
+        { email: email, otp: otp }
       );
-      console.log(response.data)
       if (response.data.success) {
         const headToken = response.data.token;
         try {
-          console.log(storedData)
           const response = await axios.post(
             "https://jwlgamesbackend.vercel.app/api/jwl/know-more",
             storedData,
@@ -90,28 +91,26 @@ const KnowMore = () => {
           if (response.data.success) {
             setStep(4); // Move to success message step
           } else {
-            console.log("Error submitting data form:", response.data);
+            toast.error("Error submitting form");
           }
         } catch (error) {
-          console.error("Error saving Data:", error);
+          toast.error("Error saving data");
           setLoader(false);
         }
         setLoader(false);
-
-      }
-      else{
+      } else {
         setLoader(false);
-        console.log("Error submitting OTP try:", response.data);
+        toast.error("Error submitting otp, try again");
       }
     } catch (error) {
-      console.error("Error submitting OTP:", error);
+      toast.error("Error submitting otp");
       setLoader(false);
     }
   };
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [symptomStatus, setSymptomStatus] = useState(null); // State to track user selection
-  const [gender, setGender] = useState(null); 
+  const [gender, setGender] = useState(null);
 
   const nextVideo = () => {
     if (currentIndex < videoUrls.length && symptomStatus !== null) {
@@ -129,9 +128,9 @@ const KnowMore = () => {
     setSymptomStatus(e.target.value);
   };
 
-  const handleGenderChange = (e) =>{
+  const handleGenderChange = (e) => {
     setGender(e.target.value);
-    handleChange(e)
+    handleChange(e);
   };
 
   return (
@@ -223,30 +222,30 @@ const KnowMore = () => {
               </label>
             </div>
             <div className="mb-1 form-floating d-flex ms-1 gap-3 flex-wrap">
-            <p className="ms-1">Child Gender :</p>
-                  <div className="form-check">
-                    <input
-                      className="form-check-input border-dark"
-                      type="radio"
-                      name="childGender"
-                      value="male"
-                      checked={gender === "male"}
-                      onChange={handleGenderChange}
-                    />
-                    <label className="form-check-label">Male</label>
-                  </div>
-                  <div className="form-check">
-                    <input
-                      className="form-check-input border-dark"
-                      type="radio"
-                      name="childGender"
-                      value="female"
-                      checked={gender === "female"}
-                      onChange={handleGenderChange}
-                    />
-                    <label className="form-check-label">Female</label>
-                  </div>
-                </div>
+              <p className="ms-1">Child Gender :</p>
+              <div className="form-check">
+                <input
+                  className="form-check-input border-dark"
+                  type="radio"
+                  name="childGender"
+                  value="male"
+                  checked={gender === "male"}
+                  onChange={handleGenderChange}
+                />
+                <label className="form-check-label">Male</label>
+              </div>
+              <div className="form-check">
+                <input
+                  className="form-check-input border-dark"
+                  type="radio"
+                  name="childGender"
+                  value="female"
+                  checked={gender === "female"}
+                  onChange={handleGenderChange}
+                />
+                <label className="form-check-label">Female</label>
+              </div>
+            </div>
             <div className="mb-3 form-floating">
               <input
                 type="text"
