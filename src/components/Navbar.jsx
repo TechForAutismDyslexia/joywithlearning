@@ -4,7 +4,7 @@ import './Navbar.css'; // Import your CSS file
 const Navbar = () => {
   return (
     <div className="navout">
-      <nav className="navbar fw-bold  navbar-expand-lg mynav">
+      <nav className="navbar fw-bold  navbar-expand-lg mynav ">
         <div className="container-fluid">
           <Link className="navbar-brand d-flex align-items-center" to="/">
             <img 
@@ -18,7 +18,7 @@ const Navbar = () => {
                 border:'1px solid black'
               }}
             />
-            <span className="fw-light fs-3">Joy With Learning</span>
+            <span className="fs-5 fw-semibold ">Joy With Learning</span>
           </Link>
           <button
             className="navbar-toggler"
