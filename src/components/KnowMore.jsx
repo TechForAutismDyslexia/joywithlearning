@@ -138,11 +138,14 @@ const KnowMore = () => {
       {step === 1 && currentIndex < videoUrls.length ? (
         <div className="container  knowmoreone bg-white rounded-4">
           <div className="video-container border border-lg border-white  rounded-4">
-            <iframe
-              src={videoUrls[currentIndex]}
-              title={`Video ${currentIndex + 1}`}
-              allowFullScreen
-            ></iframe>
+            <div className="d-flex justify-content-center mt-5 align-items-center">
+              <Loader />
+              </div>
+              <iframe
+                src={videoUrls[currentIndex]}
+                title={`Video ${currentIndex + 1}`}
+                allowFullScreen
+              ></iframe>
           </div>
           <div className="radio-buttons my-3">
             <div className="form-check">

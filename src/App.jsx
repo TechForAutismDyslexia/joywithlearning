@@ -10,6 +10,7 @@ import "./components/Footer.css";
 import "./components/Home.css"
 import "./components/Navbar.css";
 import UploadVid from "./components/UploadVid";
+import NotFound from "./components/NotFound";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/contact-us" element={<ContactUs />} />
           <Route path="/know-more" element={<KnowMore />} />
           <Route path="/upload-video" element={<UploadVid />} />
+          <Route path="/*" element={<NotFound />} />
         </Routes>
         <Footer />
       </BrowserRouter>

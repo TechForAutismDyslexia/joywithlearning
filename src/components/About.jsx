@@ -26,7 +26,7 @@ const About = () => {
           <p>Join us in our mission to create a more inclusive and supportive world for individuals with dyslexia and autism. Whether you&apos;re a parent, educator, advocate, or ally, there are many ways to get involved.</p>
 
           <h2>Contact Us</h2>
-          <p>Have questions or suggestions? We&apos;d love to hear from you! Feel free to reach out to us at <a href="mailto:contact@joywithlearning.com">contact@joywithlearning.com</a> or through our contact form.</p>
+          <p>Have questions or suggestions? We&apos;d love to hear from you! Feel free to reach out to us at <a href="mailto:info@joywithlearning.com">info@joywithlearning.com</a> or through our contact form.</p>
         </div>
       </div>
     </div>
