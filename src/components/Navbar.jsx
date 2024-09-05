@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import './Navbar.css'; // Import your CSS file
+import './Navbar.css'; 
+import family from "../assets/images/family.png"
 
 const Navbar = () => {
   return (
@@ -8,7 +9,7 @@ const Navbar = () => {
         <div className="container-fluid">
           <Link className="navbar-brand d-flex align-items-center" to="/">
             <img 
-              src="./family.png"
+              src={family}
               alt="logo"
               className="navbar-logo me-2"
               style={{
