@@ -294,7 +294,7 @@ const KnowMore = () => {
                 Parent Phone No <span className="text-danger">*</span>
               </label>
             </div>
-            <select class="form-select mb-3" onChange={handleChange} name="PreferredCentre">
+            <select className="form-select mb-3" onChange={handleChange} name="PreferredCentre">
                   <option selected>Preferred Centre</option>
                   <option value="Barkathpura">Barkathpura</option>
                   <option value="Champapet">Champapet</option>
