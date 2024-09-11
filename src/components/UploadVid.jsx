@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import "./UploadVid.css";
 import Loader from "./Loader";
-import {toast , ToastContainer} from "react-toastify"
+import { toast, ToastContainer } from "react-toastify";
 
 const UploadVid = () => {
   const [formData, setFormData] = useState({
@@ -12,6 +12,7 @@ const UploadVid = () => {
     parentName: "",
     parentEmail: "",
     parentPhoneNo: "",
+    preferredCentre: "",
     alternateEmail: "",
     alternatePhoneNo: "",
   });
@@ -47,8 +48,7 @@ const UploadVid = () => {
     try {
       const response = await axios.post(
         "https://jwlgamesbackend.vercel.app/api/jwl/verify-otp",
-        { email, otp },
-        
+        { email, otp }
       );
       setLoader(false);
       if (response.data.success) {
@@ -68,24 +68,24 @@ const UploadVid = () => {
     setLoader(true);
     const video = e.target.uploadvideo.files[0];
     const storedData = JSON.parse(sessionStorage.getItem("form1Data"));
-    const childName = storedData.childName
-    const childAge = storedData.childAge
-    const childGender = storedData.childGender
-    const parentName = storedData.parentName
-    const parentEmail = storedData.parentEmail
-    const parentPhoneNo = storedData.parentPhoneNo
-    const alternateEmail = storedData.alternateEmail
-    const alternatePhoneNo = storedData.alternatePhoneNo
-    
+    const childName = storedData.childName;
+    const childAge = storedData.childAge;
+    const childGender = storedData.childGender;
+    const parentName = storedData.parentName;
+    const parentEmail = storedData.parentEmail;
+    const parentPhoneNo = storedData.parentPhoneNo;
+    const alternateEmail = storedData.alternateEmail;
+    const alternatePhoneNo = storedData.alternatePhoneNo;
+
     const formData = new FormData();
-    formData.append("childName",childName)
-    formData.append("childAge",childAge)
-    formData.append("childGender",childGender)
-    formData.append("parentName",parentName)
-    formData.append("parentEmail",parentEmail)
-    formData.append("parentPhoneNo",parentPhoneNo)
-    formData.append("alternateEmail",alternateEmail)
-    formData.append("alternatePhoneNo",alternatePhoneNo)
+    formData.append("childName", childName);
+    formData.append("childAge", childAge);
+    formData.append("childGender", childGender);
+    formData.append("parentName", parentName);
+    formData.append("parentEmail", parentEmail);
+    formData.append("parentPhoneNo", parentPhoneNo);
+    formData.append("alternateEmail", alternateEmail);
+    formData.append("alternatePhoneNo", alternatePhoneNo);
     formData.append("video", video);
     const headToken = sessionStorage.getItem("token");
     try {
@@ -124,9 +124,12 @@ const UploadVid = () => {
     const otpEmail = dataToStore.parentEmail;
 
     try {
-      const response = await axios.post("https://jwlgamesbackend.vercel.app/api/jwl/send-otp", {
-        otpEmail,
-      });
+      const response = await axios.post(
+        "https://jwlgamesbackend.vercel.app/api/jwl/send-otp",
+        {
+          otpEmail,
+        }
+      );
       setLoader(false);
       if (response.data.success) {
         setStep(2); // Move to OTP step
@@ -250,6 +253,13 @@ const UploadVid = () => {
                     Parent Phone No <span className="text-danger">*</span>
                   </label>
                 </div>
+                <select class="form-select mb-3" onChange={handleChange} name="PreferredCentre">
+                  <option selected>Preferred Centre</option>
+                  <option value="Barkathpura">Barkathpura</option>
+                  <option value="Champapet">Champapet</option>
+                  <option value="Himayathnagar">Himayathnagar</option>
+                  <option value="Nacharam">Nacharam</option>
+                </select>
                 <div className="mb-3 form-floating">
                   <input
                     type="email"
