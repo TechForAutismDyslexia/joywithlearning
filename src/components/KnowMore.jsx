@@ -21,6 +21,8 @@ const KnowMore = () => {
     parentPhoneNo: "",
     alternateEmail: "",
     alternatePhoneNo: "",
+    childGender: "",
+    preferredCentre: "",
     video1: "",
     video2: "",
     video3: "",
@@ -294,7 +296,7 @@ const KnowMore = () => {
                 Parent Phone No <span className="text-danger">*</span>
               </label>
             </div>
-            <select className="form-select mb-3" onChange={handleChange} name="PreferredCentre">
+            <select className="form-select mb-3" onChange={handleChange} name="preferredCentre">
                   <option selected>Preferred Centre</option>
                   <option value="Barkathpura">Barkathpura</option>
                   <option value="Champapet">Champapet</option>
