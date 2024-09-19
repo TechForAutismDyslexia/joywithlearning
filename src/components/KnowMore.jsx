@@ -22,7 +22,7 @@ const KnowMore = () => {
     alternateEmail: "",
     alternatePhoneNo: "",
     childGender: "",
-    preferredCentre: "",
+    preferredCenter: "",
     video1: "",
     video2: "",
     video3: "",
