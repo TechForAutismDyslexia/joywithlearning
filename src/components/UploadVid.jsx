@@ -12,7 +12,7 @@ const UploadVid = () => {
     parentName: "",
     parentEmail: "",
     parentPhoneNo: "",
-    preferredCentre: "",
+    preferredCenter: "",
     alternateEmail: "",
     alternatePhoneNo: "",
   });
@@ -74,6 +74,7 @@ const UploadVid = () => {
     const parentName = storedData.parentName;
     const parentEmail = storedData.parentEmail;
     const parentPhoneNo = storedData.parentPhoneNo;
+    const preferredCenter = storedData.preferredCenter;
     const alternateEmail = storedData.alternateEmail;
     const alternatePhoneNo = storedData.alternatePhoneNo;
 
@@ -84,6 +85,7 @@ const UploadVid = () => {
     formData.append("parentName", parentName);
     formData.append("parentEmail", parentEmail);
     formData.append("parentPhoneNo", parentPhoneNo);
+    formData.append("preferredCenter", preferredCenter);
     formData.append("alternateEmail", alternateEmail);
     formData.append("alternatePhoneNo", alternatePhoneNo);
     formData.append("video", video);
@@ -253,8 +255,8 @@ const UploadVid = () => {
                     Parent Phone No <span className="text-danger">*</span>
                   </label>
                 </div>
-                <select className="form-select mb-3" onChange={handleChange} name="PreferredCentre">
-                  <option selected>Preferred Centre</option>
+                <select className="form-select mb-3" onChange={handleChange} name="PreferredCenter">
+                  <option selected>Preferred Center</option>
                   <option value="Barkathpura">Barkathpura</option>
                   <option value="Champapet">Champapet</option>
                   <option value="Himayathnagar">Himayathnagar</option>
