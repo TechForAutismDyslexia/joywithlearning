@@ -1,3 +1,4 @@
+import "./cssfiles/Footer.css"
 export default function Footer() {
   return (
     <div className="d-flex flex-column flex-sm-row justify-content-evenly align-items-center footer text-center p-2">

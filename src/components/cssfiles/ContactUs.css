@@ -9,9 +9,7 @@
 }
 
 .contactusform {
-  background-color: #ffffff; /* White background for the form */
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
   max-width: 600px;
 }
 

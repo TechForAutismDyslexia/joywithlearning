@@ -1,4 +1,4 @@
-import "./NotFound.css"
+import "./cssfiles/NotFound.css"
 export default function NotFound() {
   return (
     <div className="notfound d-flex justify-content-center align-items-start text-center">

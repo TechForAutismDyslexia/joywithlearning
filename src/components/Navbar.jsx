@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import './Navbar.css'; 
+import './cssfiles/Navbar.css'; 
 import family from "../assets/images/family.png"
 
 const Navbar = () => {
@@ -40,13 +40,8 @@ const Navbar = () => {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/know-more">
-                  Know More
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/upload-video">
-                  Upload Video
+                <Link className="nav-link" to="/enquire">
+                  Enquire
                 </Link>
               </li>
               <li className="nav-item">

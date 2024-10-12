@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import './Faq.css'
+import './cssfiles/Faq.css'
 
 const Faq = () => {
   const [activeIndex, setActiveIndex] = useState(null);
@@ -62,7 +62,7 @@ const Faq = () => {
   return (
     <div className='faq'>
     <div className="container mt-5 mb-5">
-      <h1 className="mb-4 fw-medium text-center">Frequently Asked Questions</h1>
+      <h1 className="mb-4 fw-medium text-center fw-bold">Frequently Asked Questions</h1>
       <div className="faq-list">
         {faqs.map((faq, index) => (
           <div key={index} className="faq-item mb-3" onClick={() => toggleFAQ(index)}>

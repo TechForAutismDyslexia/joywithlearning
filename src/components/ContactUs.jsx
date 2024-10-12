@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
-import "./ContactUs.css";
+import "./cssfiles/ContactUs.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Loader from "./Loader";
@@ -57,13 +57,13 @@ const ContactUs = () => {
         <div className="row justify-content-center mt-5">
           <div className="col-lg-8">
             <form
-              className="border contactusform m-auto p-4 bg-white"
+              className="border contactusform m-auto p-4 bg-white rounded-4"
               onSubmit={handleSubmit}
             >
               {step == 1 && (
                 <div>
-                  <h1 className="text-center fw-light mb-4">
-                    Help Us By Providing Your Valuable Feedback
+                  <h1 className="text-center fw-bold mb-4">
+                    Contact Us
                   </h1>
                   <div className="mb-3 form-floating">
                     <input
@@ -109,7 +109,7 @@ const ContactUs = () => {
                       }}
                     ></textarea>
                     <label htmlFor="feedback">
-                      Feedback<span className="text-danger"> *</span>
+                      Feedback/Queries<span className="text-danger"> *</span>
                     </label>
                   </div>
                   <div className="text-center">

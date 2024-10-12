@@ -1,4 +1,4 @@
-import "./Loader.css"
+import "./cssfiles/Loader.css"
 export default function Loader() {
   return (
     <svg viewBox="25 25 50 50">
