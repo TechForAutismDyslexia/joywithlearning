@@ -240,8 +240,8 @@ const Enquire = () => {
     const headToken = sessionStorage.getItem("token");
     try {
       const response = await axios.post(
-        "http://localhost:4000/api/jwl/enquire",
-        // "https://jwlgamesbackend.vercel.app/api/jwl/enquire",
+        // "http://localhost:4000/api/jwl/enquire",
+        "https://jwlgamesbackend.vercel.app/api/jwl/enquire",
         finalFormData,
         {
           headers: {
