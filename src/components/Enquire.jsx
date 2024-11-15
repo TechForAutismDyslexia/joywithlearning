@@ -31,7 +31,7 @@ const Enquire = () => {
     "Does your child make unusual finger movements near his or her eyes? (For example, does your child wiggle his or her fingers close to his or her eyes?)",
     "Does your child point with one finger to ask for something or to get help? (For example, pointing to a snack or toy that is out of reach)",
     "Does your child point with one finger to show you something interesting? (For example, pointing to an airplane in the sky or a big truck in the road)",
-    "Is your child interested in other children? (For example, does your child watch other children, smile at them, or go to them?)",
+    "When you smile at your child, does he or she smile back at you?",
     "Does your child show you things by bringing them to you or holding them up for you to see — not to get help, but just to share? (For example, showing you a flower, a stuffed animal, or a toy truck)",
     "Does your child respond when you call his or her name? (For example, does he or she look up, talk or babble, or stop what he or she is doing when you call his or her name?)",
   ];
@@ -316,7 +316,7 @@ const Enquire = () => {
                     />
                   </div>
                   <div className="col-md-6">
-                    <label className="form-label">Childs Gender</label>
+                    <label className="form-label">Child Gender</label>
                     <div>
                       <div className="form-check form-check-inline">
                         <input
@@ -411,10 +411,10 @@ const Enquire = () => {
                 </div>
               </div>
             </div>
-
+              
             <div className="card mb-4">
               <div className="card-header">
-                <h2 className="mb-0">Questionnaire</h2>
+                <h2 className="mb-0">Few things we want to know. . .</h2>
               </div>
               <div className="card-body">
                 {questions.map((q, i) => (
