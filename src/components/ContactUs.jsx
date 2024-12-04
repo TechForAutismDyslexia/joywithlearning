@@ -28,7 +28,7 @@ const ContactUs = () => {
     try {
       setLoader(true);
       const response = await axios.post(
-        "https://jwlgamesbackend.vercel.app/api/jwl/feedback",
+        "https://joywithlearning.com/api/jwl/feedback",
         formData
       );
       if (response.data.success) {

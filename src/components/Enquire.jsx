@@ -180,7 +180,7 @@ const Enquire = () => {
     setLoading(true);
     try {
       const response = await axios.post(
-        "https://jwlgamesbackend.vercel.app/api/jwl/send-otp",
+        "https://joywithlearning.com/api/jwl/send-otp",
         {
           otpEmail,
         }
@@ -207,7 +207,7 @@ const Enquire = () => {
     const email = formData.parentEmail;
     try {
       const response = await axios.post(
-        "https://jwlgamesbackend.vercel.app/api/jwl/verify-otp",
+        "https://joywithlearning.com/api/jwl/verify-otp",
         { email: email, otp: otp }
       );
       if (response.data.success) {
@@ -240,8 +240,7 @@ const Enquire = () => {
     const headToken = sessionStorage.getItem("token");
     try {
       const response = await axios.post(
-        // "http://localhost:4000/api/jwl/enquire",
-        "https://jwlgamesbackend.vercel.app/api/jwl/enquire",
+        "https://joywithlearning.com/api/jwl/enquire",
         finalFormData,
         {
           headers: {
