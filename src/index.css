@@ -15,8 +15,7 @@
 
 body {
   min-height: 100vh;
-  font-family: 'Inter', sans-serif;
-  
+  font-family: "Inter", sans-serif;
 }
 
 input:-webkit-autofill,
@@ -33,6 +32,6 @@ select:-webkit-autofill:focus {
   box-shadow: 0 0 0px 1000px white inset;
   transition: background-color 5000s ease-in-out 0s;
 }
-option {
+select.form-select option {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 }

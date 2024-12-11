@@ -1,0 +1,31 @@
+.enquire {
+  background: linear-gradient(
+    135deg,
+    rgba(0, 247, 255, 0.2) 0%,
+    rgba(63, 94, 251, 0.2) 100%
+  );
+  /* background-image: url('../../assets/images/jwlenquire.jpg'); */
+    background-size: cover;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 70px;
+}
+
+.uploadvidform {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    background-color: rgba(255, 255, 255, 0.5);
+}
+.uploadvidform .form-control {
+  color: #000; 
+}
+
+.uploadsuccess{
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+input[type="radio"]:checked {
+  background-color: var(--bs-info);
+}

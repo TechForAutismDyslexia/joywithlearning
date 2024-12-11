@@ -1,6 +1,8 @@
 .about {
     background: linear-gradient(135deg, rgba(0,247,255,0.2) 0%, rgba(63,94,251,0.2) 100%);
-    
+    /* background-image: url('../../assets/images/jwlabout.jpg'); */
+    background-attachment: fixed;
+    background-size: cover;
     padding: 50px 0; /* Adjust padding as needed */
   }
   
@@ -8,7 +10,7 @@
     max-width: 1800px;
     width: 90%;
     margin: 0 auto;
-    background-color: #fff; /* Optional: Add a solid background color for contrast */
+    background-color: rgba(255, 255, 255, 0.5);
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);

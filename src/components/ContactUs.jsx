@@ -28,16 +28,15 @@ const ContactUs = () => {
     try {
       setLoader(true);
       const response = await axios.post(
-        "https://joywithlearning.com/api/jwl/feedback",
+        "https://jwlgamesbackend.vercel.app/api/jwl/feedback",
         formData
       );
       if (response.data.success) {
         setLoader(false);
-        // toast.success(response.data.message)
         setStep(2);
       } else {
         setLoader(false);
-        toast.error(response.data.message);
+        toast.error(response.data.message, { autoClose: 2000 });
       }
       setFormData({
         name: "",
@@ -46,7 +45,7 @@ const ContactUs = () => {
       });
     } catch (error) {
       setLoader(false);
-      toast.error("Error Saving Feedback");
+      toast.error("Error Saving Feedback", { autoClose: 2000 });
     }
   };
 
@@ -57,18 +56,18 @@ const ContactUs = () => {
         <div className="row justify-content-center mt-5">
           <div className="col-lg-8">
             <form
-              className="border contactusform m-auto p-4 bg-white rounded-4"
+              className="contactusform m-auto border  p-4 rounded-4"
               onSubmit={handleSubmit}
             >
               {step == 1 && (
                 <div>
-                  <h1 className="text-center fw-bold mb-4">
+                  <h1 className="text-center text-black fw-bold mb-4">
                     Contact Us
                   </h1>
                   <div className="mb-3 form-floating">
                     <input
                       type="text"
-                      className="form-control"
+                      className="form-control "
                       id="name"
                       name="name"
                       value={formData.name}
@@ -83,7 +82,7 @@ const ContactUs = () => {
                   <div className="mb-3 form-floating">
                     <input
                       type="email"
-                      className="form-control"
+                      className="form-control "
                       id="email"
                       name="email"
                       value={formData.email}
@@ -97,7 +96,7 @@ const ContactUs = () => {
                   </div>
                   <div className="mb-3 form-floating">
                     <textarea
-                      className="form-control"
+                      className="form-control "
                       id="feedback"
                       name="feedback"
                       value={formData.feedback}
@@ -116,7 +115,7 @@ const ContactUs = () => {
                     {!loader && (
                       <button
                         type="submit"
-                        className="btn btn-primary w-100 p-2"
+                        className="btn btn-info btn-outline-success text-white fw-bold border w-100 p-2"
                       >
                         Submit
                       </button>
@@ -126,7 +125,7 @@ const ContactUs = () => {
                 </div>
               )}
               {step == 2 && (
-                <h1 className="text-center fw-light p-3">
+                <h1 className="text-center text-black fw-bold p-3">
                   Thank you for your feedback, We will contact you shortly
                 </h1>
               )}
