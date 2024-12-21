@@ -28,7 +28,7 @@ const ContactUs = () => {
     try {
       setLoader(true);
       const response = await axios.post(
-        "https://joywithlearning.com/api/jwl/feedback",
+        "https://api.joywithlearning.com/api/jwl/feedback",
         formData
       );
       if (response.data.success) {
