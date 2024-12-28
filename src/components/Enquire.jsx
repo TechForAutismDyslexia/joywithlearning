@@ -1,5 +1,6 @@
 import axios from "axios";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./cssfiles/Enquire.css";
 import Loader from "./Loader";
 // eslint-disable-next-line no-unused-vars
@@ -20,8 +21,26 @@ const Enquire = () => {
   const videoRef = useRef(null);
   const videoInputRef = useRef(null);
 
-  const MAX_VIDEO_SIZE_MB = 5;
+  const MAX_VIDEO_SIZE_MB = 45;
   const MAX_VIDEO_DURATION_SECONDS = 60;
+
+  const [backTimer, setBackTimer] = useState(10);
+  const [isRedirecting, setIsRedirecting] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    let timer;
+    if (isRedirecting && backTimer > 0) {
+      timer = setInterval(() => {
+        setBackTimer((prev) => prev - 1);
+      }, 1000);
+    }
+    if (backTimer === 0) {
+      clearInterval(timer);
+      navigate("/");
+    }
+    return () => clearInterval(timer);
+  }, [isRedirecting, backTimer, navigate]);
 
   const questions = [
     "If you point at something across the room, does your child look at it? (For example, If you point at a toy or an animal, does your child look at the toy or animal?)",
@@ -85,7 +104,7 @@ const Enquire = () => {
       };
 
       video.onerror = () => {
-        toast.error("Error loading video file", { autoClose: 2000 });
+        toast.error("Unable to load video file", { autoClose: 2000 });
         reject("Error loading video file");
         video.remove();
       };
@@ -109,7 +128,7 @@ const Enquire = () => {
       }
 
       if (video.size / (1024 * 1024) > MAX_VIDEO_SIZE_MB) {
-        toast.error("Video size exceeds 5MB.", { autoClose: 2000 });
+        toast.error("Video size exceeds 45MB.", { autoClose: 2000 });
         clearFileInput();
         return;
       }
@@ -121,7 +140,7 @@ const Enquire = () => {
 
       setVideoPreview(URL.createObjectURL(video));
       setIsInputHidden(true);
-      toast.success("Video uploaded", { autoClose: 2000 });
+      // toast.success("Video uploaded", { autoClose: 2000 });
     } catch (error) {
       clearFileInput();
       toast.error("Unable to process video.", { autoClose: 2000 });
@@ -175,14 +194,14 @@ const Enquire = () => {
         setLoading(false);
         setOtpSent(true);
         nextStep();
-        toast.success(response.data.messaage, { autoClose: 2000 });
+        toast.success("OTP sent successfully", { autoClose: 2000 });
       } else {
         toast.error(response.data.message, { autoClose: 2000 });
         setLoading(false);
         setOtpSent(false);
       }
     } catch (error) {
-      toast.error("Error sending otp", { autoClose: 2000 });
+      toast.error("Unable to send otp", { autoClose: 2000 });
       setLoading(false);
       setOtpSent(false);
     }
@@ -199,17 +218,17 @@ const Enquire = () => {
       );
       if (response.data.success) {
         sessionStorage.setItem("token", response.data.token);
-        toast.success(response.data.message, { autoClose: 2000 });
+        // toast.success(response.data.message, { autoClose: 2000 });
         handleSubmitForm();
       } else {
         setLoading(false);
         setVerified(false);
-        toast.error(response.data.message, { autoClose: 2000 });
+        toast.error("OTP is inavlid", { autoClose: 2000 });
       }
     } catch (error) {
       setLoading(false);
       setVerified(false);
-      toast.error("Error verifying OTP", { autoClose: 2000 });
+      toast.error("Unable to verify OTP", { autoClose: 2000 });
     }
   };
 
@@ -239,25 +258,28 @@ const Enquire = () => {
         setLoading(false);
         setVerified(true);
         setSubmitted(true);
-        toast.success(response.data.message, { autoClose: 2000 });
+        setIsRedirecting(true);
+        toast.success("Enquiry Success", { autoClose: 2000 });
       } else {
         setLoading(false);
         setVerified(false);
         setSubmitted(false);
-        toast.error(response.data.message, { autoClose: 2000 });
+        toast.error("Unable to process request", { autoClose: 2000 });
       }
     } catch (error) {
       setLoading(false);
       setVerified(false);
       setSubmitted(false);
-      toast.error("Error Submitting form", { autoClose: 2000 });
+      toast.error("Unable to submit form", { autoClose: 2000 });
     }
   };
 
   return (
-    <div className="enquire ">
+    <div className="enquire">
       <div className="container py-4 uploadvidform mt-5 rounded-4 ">
-        <h1 className="text-center mb-4 fw-bold">Enquiry Form</h1>
+        <h1 className="text-center mb-4 fw-bold">
+          {currentStep === 3 ? "Upload the Video" : submitted ? "Success!!" : "Enquiry Form"}
+        </h1>
         <div
           className="position-fixed top-0 end-0 p-3"
           style={{ zIndex: 1050 }}
@@ -478,12 +500,12 @@ const Enquire = () => {
             {currentStep === 3 && (
               <div className="card mb-4">
                 <div className="card-header">
-                  <h2 className="mb-0">Video Upload</h2>
+                  <h2 className="mb-0">Please choose a file to upload. . .</h2>
                 </div>
                 <div className="card-body">
                   <div className="mb-3">
                     <label htmlFor="videoUpload" className="form-label">
-                      (Maximum Size : 5MB, Maximum Duration : 60 seconds){" "}
+                      (Maximum Size : 45MB, Maximum Duration : 60 seconds){" "}
                       <span className="text-danger">*</span>
                     </label>
                     {!isInputHidden && (
@@ -576,7 +598,7 @@ const Enquire = () => {
                   className="btn btn-info text-white ms-auto"
                   onClick={nextStep}
                 >
-                  Next
+                  {currentStep === 2 ? "Upload Video" : "Next"}
                 </button>
               )}
               {currentStep === 3 && !loading && (
@@ -609,10 +631,13 @@ const Enquire = () => {
           <div className="card p-4">
             <div className="card-body bg-white">
               <h3 className="card-title text-center ">
-                Details and video uploaded successfully. An enquiry has been
-                raised. Our admin will contact you shortly.
+                Thank you for filling the form. An enquiry has been raised. We
+                will get back to you shortly.
               </h3>
             </div>
+              <button className="btn btn-outline-success" onClick={() => navigate("/")}>
+                OK ( Redirecting to home page in {backTimer} sec)
+              </button>
           </div>
         )}
       </div>
